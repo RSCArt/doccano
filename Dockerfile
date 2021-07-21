@@ -1,6 +1,8 @@
-ARG PYTHON_VERSION="3.8.6"
-ARG NODE_VERSION="13.7"
-FROM node:${NODE_VERSION}-alpine AS frontend-builder
+# Python update 3.8.6-slim-buster --> 3.9.6-slim-buster
+ARG PYTHON_VERSION="3.9.6-slim-buster"
+# Node update 13.7-alpine --> 16.5-alpine3.14
+ARG NODE_VERSION="16.5-alpine3.14"
+FROM node:${NODE_VERSION} AS frontend-builder
 
 COPY frontend/ /frontend/
 WORKDIR /frontend
@@ -27,7 +29,8 @@ WORKDIR /tmp
 COPY Pipfile* /tmp/
 
 # hadolint ignore=DL3013
-RUN pip install --no-cache-dir -U pip pipenv==2020.11.15 \
+RUN pip install --upgrade pip \
+ && pip install --no-cache-dir --upgrade pipenv \
  && pipenv lock -r > /requirements.txt \
  && echo "psycopg2-binary==2.8.6" >> /requirements.txt \
  && echo "django-heroku==0.3.1" >> /requirements.txt \

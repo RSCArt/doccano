@@ -9,6 +9,7 @@ services:
       - static_volume:/backend/staticfiles
       - media:/backend/media
     environment:
+      # Change before deployment
       ADMIN_USERNAME: "admin"
       ADMIN_PASSWORD: "password"
       ADMIN_EMAIL: "admin@example.com"
@@ -40,8 +41,10 @@ services:
       - network-backend
 
   rabbitmq:
-    image: rabbitmq:3.8
+    # Changed to alpine variation
+    image: rabbitmq:3.8-alpine
     environment:
+      # Change before deployment
       RABBITMQ_DEFAULT_USER: "doccano"
       RABBITMQ_DEFAULT_PASS: "doccano"
     ports:
@@ -60,17 +63,20 @@ services:
       - static_volume:/static
       - media:/media
     ports:
-      - 80:8080
+      # Change port to 8001 for running rootless
+      - 8001:8080
     depends_on:
       - backend
     networks:
       - network-frontend
 
   postgres:
-    image: postgres:13.1-alpine
+    # Update image 13.1-alpine --> 13.3-alpine | Uses Alpine 3.14
+    image: postgres:13.3-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
+      # These should be changed before deployment
       POSTGRES_USER: "doccano"
       POSTGRES_PASSWORD: "doccano"
       POSTGRES_DB: "doccano"

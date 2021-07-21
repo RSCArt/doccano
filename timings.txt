@@ -1,0 +1,31 @@
+rabbitmq uses an image, skipping
+postgres uses an image, skipping
+Building celery
+Building backend
+Building nginx
+
+real	6m6.561s
+user	0m0.760s
+sys	0m0.156s
+rabbitmq uses an image, skipping
+postgres uses an image, skipping
+Building celery
+Building backend
+Building nginx
+
+real	6m47.995s
+user	0m0.851s
+sys	0m0.144s
+rabbitmq uses an image, skipping
+postgres uses an image, skipping
+Building celery
+Building backend
+Building nginx
+
+real	11m13.034s
+user	0m0.975s
+sys	0m0.169s
+rabbitmq uses an image, skipping
+postgres uses an image, skipping
+Building celery
+Aborting.

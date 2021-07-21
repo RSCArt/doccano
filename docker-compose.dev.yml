@@ -9,6 +9,7 @@ services:
       - .:/src
       - venv:/root/.local/share
     environment:
+      # Change before deployment
       ADMIN_USERNAME: "admin"
       ADMIN_PASSWORD: "password"
       ADMIN_EMAIL: "admin@example.com"
@@ -43,7 +44,8 @@ services:
       - network-backend
 
   rabbitmq:
-    image: rabbitmq:3.8
+    # Update to alpine variation | Uses Alpine 3.14
+    image: rabbitmq:3.8-alpine
     environment:
       RABBITMQ_DEFAULT_USER: "doccano"
       RABBITMQ_DEFAULT_PASS: "doccano"
@@ -53,7 +55,8 @@ services:
       - network-backend
 
   frontend:
-    image: node:13.7.0
+    # Updated from 13.7.0 -> 16.5-alpine3.14 | Keeps alpine version consistent where possible
+    image: node:16.5-alpine3.14
     command: ["/src/tools/dev-nuxt.sh"]
     working_dir: /src/frontend
     environment:
@@ -69,7 +72,8 @@ services:
       - network-frontend
 
   postgres:
-    image: postgres:13.1-alpine
+    # Update image 13.1-alpine --> 13.3-alpine | Uses Alpine 3.14
+    image: postgres:13.3-alpine
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
