@@ -14,7 +14,7 @@ RUN apk add -U --no-cache git python3 make g++ \
  && yarn build \
  && apk del --no-cache git make g++
 
-FROM python:${PYTHON_VERSION}-slim-buster AS backend-builder
+FROM python:${PYTHON_VERSION} AS backend-builder
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
